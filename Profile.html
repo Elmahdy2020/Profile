@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed Elmahdy | Advanced Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    /* Advanced Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    @keyframes slideInFromLeft {
+      0% { transform: translateX(-100px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideInFromRight {
+      0% { transform: translateX(100px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+    }
+
+    /* Code Background Effect */
+    .code-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .code-line {
+      position: absolute;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: rgba(59, 130, 246, 0.1);
+      animation: codeFloat 15s linear infinite;
+      white-space: nowrap;
+    }
+    
+    @keyframes codeFloat {
+      0% { transform: translateY(100vh) translateX(-10px); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100px) translateX(10px); opacity: 0; }
+    }
+    
+    /* Advanced fade effects */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .slide-left {
+      animation: slideInFromLeft 0.8s ease-out;
+    }
+    
+    .slide-right {
+      animation: slideInFromRight 0.8s ease-out;
+    }
+    
+    .scale-in {
+      animation: scaleIn 0.6s ease-out;
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .glow-effect {
+      animation: glow 2s ease-in-out infinite;
+    }
+    
+    /* Skill card hover effects */
+    .skill-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-8px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Progress bars */
+    .progress-bar {
+      width: 0%;
+      transition: width 2s ease-in-out;
+    }
+    
+    .progress-bar.animate {
+      width: var(--progress);
+    }
+    
+    /* Navigation hover effect (fixed underline) */
+    nav a {
+      position: relative;
+      padding-bottom: 4px; /* give space for underline */
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #3b82f6, #6366f1);
+      transform: scaleX(0);      /* hidden by default */
+      transform-origin: left;    /* animate from left to right */
+      transition: transform 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      transform: scaleX(1);      /* underline expands under text */
+    }
+</style>
+
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans overflow-x-hidden">
+
+  <!-- Code Background -->
+  <div class="code-bg" id="codeBg"></div>
+
+  <!-- Header -->
+  <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 animate__animated animate__fadeInDown">
+    <div class="max-w-7xl mx-auto flex justify-between items-center p-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+        Mohamed Elmahdy
+      </h1>
+      <nav class="space-x-8 text-gray-700 text-lg">
+        <a href="#about" class="hover:text-blue-600 font-medium">About</a>
+        <a href="#skills" class="hover:text-blue-600 font-medium">Skills</a>
+        <a href="#experience" class="hover:text-blue-600 font-medium">Experience</a>
+        <a href="#projects" class="hover:text-blue-600 font-medium">Projects</a>
+        <a href="#education" class="hover:text-blue-600 font-medium">Education</a>
+        <a href="#contact" class="hover:text-blue-600 font-medium">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+ <section class="relative text-center py-32 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 text-white overflow-hidden">
+  <div class="absolute inset-0 bg-black/20"></div>
+  <div class="relative z-10">
+    <img src="https://i.postimg.cc/MZsWhCVH/cropped-profile.jpg" alt="Profile Photo" 
+         class="w-40 h-40 rounded-full mx-auto mb-8 shadow-2xl border-4 border-white/30 floating glow-effect">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 animate__animated animate__fadeInUp">
+      Hi, I'm <span class="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Mohamed</span>
+    </h2>
+    <h3 class="text-3xl md:text-4xl mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+      <span id="typed" class="text-yellow-300"></span>
+    </h3>
+    <p class="text-xl max-w-4xl mx-auto opacity-90 leading-relaxed animate__animated animate__fadeInUp animate__delay-2s">
+      Structural Engineer & Computational Designer specializing in advanced BIM workflows, 
+      steel structure optimization, and cutting-edge automation tools for the construction industry.
+    </p>
+  </div>
+</section>
+
+
+  <!-- About -->
+  <section id="about" class="max-w-6xl mx-auto py-24 px-6 fade-in">
+    <h3 class="text-4xl font-bold mb-12 flex items-center justify-center">
+      <i data-lucide="user-circle" class="w-10 h-10 mr-4 text-blue-600"></i>
+      About Me
+    </h3>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="slide-left">
+        <ul class="space-y-6 text-lg leading-relaxed">
+          <li class="flex items-start">
+            <i data-lucide="check-circle" class="w-6 h-6 mr-3 text-green-500 mt-1 flex-shrink-0"></i>
+            <span><strong>Structural Engineering Expert:</strong> 2+ years specializing in steel structures, complex connections, and high-rise building design with proven track record in Qatar, KSA, and UAE markets.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="code-2" class="w-6 h-6 mr-3 text-blue-500 mt-1 flex-shrink-0"></i>
+            <span><strong>Advanced Developer:</strong> 6+ years creating sophisticated automation tools, BIM integrations, and custom plugins for major engineering software platforms.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="brain" class="w-6 h-6 mr-3 text-purple-500 mt-1 flex-shrink-0"></i>
+            <span><strong>Innovation Leader:</strong> Pioneering computational design solutions that bridge traditional engineering with cutting-edge technology.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="slide-right">
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card">
+          <h4 class="text-2xl font-bold mb-6 text-gray-800">Core Competencies</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Software Development</span>
+                <span class="text-blue-600">95%</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full" style="--progress: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Structural Design & Detailing</span>
+                <span class="text-green-600">90%</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="progress-bar bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full" style="--progress: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">BIM & Computational Design</span>
+                <span class="text-purple-600">92%</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="progress-bar bg-gradient-to-r from-purple-500 to-purple-600 h-3 rounded-full" style="--progress: 92%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="bg-gradient-to-br from-gray-50 to-blue-50 py-24 fade-in">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-4xl font-bold mb-16 text-center flex justify-center items-center">
+        <i data-lucide="brain-circuit" class="w-10 h-10 mr-4 text-blue-600"></i>
+        Advanced Skills & Expertise
+      </h3>
+
+      <!-- Computational Design Skills -->
+      <div class="mb-16">
+        <button onclick="toggleSkill('comp-skill')" class="flex justify-between items-center w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+          <div class="flex items-center">
+            <i data-lucide="cpu" class="w-8 h-8 mr-4"></i>
+            <h4 class="text-2xl font-bold">Computational Design & Parametric Modeling</h4>
+          </div>
+          <span id="icon-comp-skill" class="text-3xl font-bold">+</span>
+        </button>
+        <div id="comp-skill" class="hidden mt-6 p-8 bg-white rounded-2xl shadow-lg animate__animated animate__fadeIn">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h5 class="text-xl font-bold text-green-700 mb-4">Advanced Parametric Solutions</h5>
+              <p class="mb-4 text-gray-700 leading-relaxed">
+                Expert in creating sophisticated parametric models using <strong>Rhino 3D, Grasshopper, and Dynamo</strong>. 
+                Specialized in developing complex algorithmic solutions for structural optimization, form-finding, and generative design.
+              </p>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center"><i data-lucide="zap" class="w-4 h-4 mr-2 text-green-500"></i>Algorithmic structural optimization</li>
+                <li class="flex items-center"><i data-lucide="zap" class="w-4 h-4 mr-2 text-green-500"></i>Generative design for complex geometries</li>
+                <li class="flex items-center"><i data-lucide="zap" class="w-4 h-4 mr-2 text-green-500"></i>Real-time parameter optimization</li>
+                <li class="flex items-center"><i data-lucide="zap" class="w-4 h-4 mr-2 text-green-500"></i>Multi-objective design exploration</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="text-xl font-bold text-green-700 mb-4">Integration & Automation</h5>
+              <ul class="space-y-3">
+                <li class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                  <strong>Cross-Platform Data Flow:</strong> Seamless integration between Rhino, Revit, Tekla, and analysis software
+                </li>
+                <li class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                  <strong>Custom Grasshopper Components:</strong> Developed 50+ custom components for structural analysis
+                </li>
+                <li class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                  <strong>API Integration:</strong> Direct connection to SAP2000, ETABS, and STAAD.Pro APIs
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engineering Skills -->
+      <div class="mb-16">
+        <button onclick="toggleSkill('eng-skill')" class="flex justify-between items-center w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+          <div class="flex items-center">
+            <i data-lucide="building" class="w-8 h-8 mr-4"></i>
+            <h4 class="text-2xl font-bold">Advanced Structural Engineering</h4>
+          </div>
+          <span id="icon-eng-skill" class="text-3xl font-bold">+</span>
+        </button>
+        <div id="eng-skill" class="hidden mt-6 p-8 bg-white rounded-2xl shadow-lg animate__animated animate__fadeIn">
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="text-center p-6 bg-indigo-50 rounded-xl">
+              <i data-lucide="hammer" class="w-12 h-12 mx-auto mb-4 text-indigo-600"></i>
+              <h5 class="font-bold text-lg mb-2">Steel Structures</h5>
+              <p class="text-gray-600">Expert in complex steel connections, moment frames, and industrial buildings</p>
+            </div>
+            <div class="text-center p-6 bg-purple-50 rounded-xl">
+              <i data-lucide="activity" class="w-12 h-12 mx-auto mb-4 text-purple-600"></i>
+              <h5 class="font-bold text-lg mb-2">Dynamic Analysis</h5>
+              <p class="text-gray-600">Seismic design, wind analysis, and advanced structural dynamics</p>
+            </div>
+            <div class="text-center p-6 bg-blue-50 rounded-xl">
+              <i data-lucide="layers" class="w-12 h-12 mx-auto mb-4 text-blue-600"></i>
+              <h5 class="font-bold text-lg mb-2">BIM Leadership</h5>
+              <p class="text-gray-600">Advanced 3D modeling, clash detection, and coordinated deliverables</p>
+            </div>
+          </div>
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl">
+            <h5 class="text-xl font-bold text-indigo-700 mb-4">Specialized Capabilities</h5>
+            <div class="grid md:grid-cols-2 gap-6">
+              <ul class="space-y-2">
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>High-rise building design (50+ floors)</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Large-span industrial structures</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Complex steel connection optimization</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Performance-based seismic design</li>
+              </ul>
+              <ul class="space-y-2">
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Advanced analysis (Pushover, Time History)</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Steel fabrication optimization</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>Multi-discipline coordination</li>
+                <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 mr-2 text-green-500"></i>International code compliance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Developer Skills -->
+      <div class="mb-16">
+        <button onclick="toggleSkill('dev-skill')" class="flex justify-between items-center w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+          <div class="flex items-center">
+            <i data-lucide="code" class="w-8 h-8 mr-4"></i>
+            <h4 class="text-2xl font-bold">Software Development & Automation</h4>
+          </div>
+          <span id="icon-dev-skill" class="text-3xl font-bold">+</span>
+        </button>
+        <div id="dev-skill" class="hidden mt-6 p-8 bg-white rounded-2xl shadow-lg animate__animated animate__fadeIn">
+          <div class="mb-8">
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              Advanced developer with expertise in <strong>C#, C++, Python, Java, JavaScript</strong>. Specialized in creating 
+              enterprise-level applications for structural engineering workflows, API integrations, and cloud-based solutions.
+            </p>
+            <div class="grid md:grid-cols-4 gap-4 mb-8">
+              <div class="p-4 bg-blue-50 rounded-lg text-center skill-card">
+                <i data-lucide="code-2" class="w-8 h-8 mx-auto mb-2 text-blue-600"></i>
+                <h6 class="font-bold">API Development</h6>
+              </div>
+              <div class="p-4 bg-green-50 rounded-lg text-center skill-card">
+                <i data-lucide="database" class="w-8 h-8 mx-auto mb-2 text-green-600"></i>
+                <h6 class="font-bold">Database Design</h6>
+              </div>
+              <div class="p-4 bg-purple-50 rounded-lg text-center skill-card">
+                <i data-lucide="cloud" class="w-8 h-8 mx-auto mb-2 text-purple-600"></i>
+                <h6 class="font-bold">Cloud Solutions</h6>
+              </div>
+              <div class="p-4 bg-orange-50 rounded-lg text-center skill-card">
+                <i data-lucide="smartphone" class="w-8 h-8 mx-auto mb-2 text-orange-600"></i>
+                <h6 class="font-bold">Mobile Apps</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Tools Grid -->
+      <h4 class="text-3xl font-bold mb-12 text-gray-800 text-center">Engineering Software Mastery</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Tool Cards with enhanced styling -->
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="calculator" class="w-8 h-8 mr-3 text-blue-700"></i>
+            <h5 class="text-xl font-bold text-blue-700">SAP2000</h5>
+          </div>
+          <p class="text-gray-700 mb-4">Advanced structural analysis with custom automation scripts. Developed tools for result extraction, optimization workflows, and seamless integration with CAD platforms.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">API Integration</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Automation</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Optimization</span>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="building-2" class="w-8 h-8 mr-3 text-green-700"></i>
+            <h5 class="text-xl font-bold text-green-700">ETABS</h5>
+          </div>
+          <p class="text-gray-700 mb-4">Building analysis with advanced seismic design capabilities. Custom load combination generators and automated design verification systems.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Seismic Design</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Load Gen</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Verification</span>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="wrench" class="w-8 h-8 mr-3 text-purple-700"></i>
+            <h5 class="text-xl font-bold text-purple-700">IDEA StatiCa</h5>
+          </div>
+          <p class="text-gray-700 mb-4">Steel connection design with automated optimization algorithms. Direct API integration for seamless connection verification and documentation.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Connections</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Optimization</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">API</span>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="box" class="w-8 h-8 mr-3 text-red-700"></i>
+            <h5 class="text-xl font-bold text-red-700">Tekla Structures</h5>
+          </div>
+          <p class="text-gray-700 mb-4">Advanced 3D modeling and detailing with custom plugins for automated drawing generation and model optimization.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">3D Modeling</span>
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Plugins</span>
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Drawings</span>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="layers-3" class="w-8 h-8 mr-3 text-orange-700"></i>
+            <h5 class="text-xl font-bold text-orange-700">Autodesk Revit</h5>
+          </div>
+          <p class="text-gray-700 mb-4">BIM coordination with advanced Dynamo scripting for parametric modeling and automated documentation workflows.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">BIM</span>
+            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Dynamo</span>
+            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Automation</span>
+          </div>
+        </div>
+
+        <div class="p-8 bg-white shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 skill-card scale-in">
+          <div class="flex items-center mb-4">
+            <i data-lucide="shapes" class="w-8 h-8 mr-3 text-cyan-700"></i>
+            <h5 class="text-xl font-bold text-cyan-700">Rhino + Grasshopper</h5>
+          </div>
+          <p class="text-gray-700 mb-4">Computational design platform for complex parametric modeling, optimization algorithms, and generative design solutions.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm">Parametric</span>
+            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm">Algorithms</span>
+            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm">Generative</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="max-w-6xl mx-auto py-24 px-6 fade-in">
+    <h3 class="text-4xl font-bold mb-16 text-center flex justify-center items-center">
+      <i data-lucide="briefcase" class="w-10 h-10 mr-4 text-blue-600"></i>
+      Professional Experience
+    </h3>
+    <div class="space-y-12">
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card slide-left">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center">
+            <i data-lucide="building" class="w-8 h-8 mr-4 text-blue-600"></i>
+            <div>
+              <h4 class="text-2xl font-bold text-gray-800">Steel Structure Engineer & Developer</h4>
+              <p class="text-lg text-blue-600 font-semibold">F&D Engineering</p>
+            </div>
+          </div>
+          <span class="text-gray-600 font-medium bg-gray-100 px-4 py-2 rounded-full">Aug 2023 – Present</span>
+        </div>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Led development of advanced automation suite reducing design time by 60% for steel structures</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Designed and optimized complex steel connections for 1200+ ton yacht complex project</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Created comprehensive Tekla-to-fabrication workflow eliminating manual errors</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Managed multi-million dollar warehouse projects across Qatar, KSA, and UAE</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card slide-right">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center">
+            <i data-lucide="cpu" class="w-8 h-8 mr-4 text-green-600"></i>
+            <div>
+              <h4 class="text-2xl font-bold text-gray-800">Computational Designer</h4>
+              <p class="text-lg text-green-600 font-semibold">Atkins (SNC-Lavalin), London</p>
+            </div>
+          </div>
+          <span class="text-gray-600 font-medium bg-gray-100 px-4 py-2 rounded-full">Aug 2022 – Jul 2023</span>
+        </div>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Developed cutting-edge parametric design solutions for complex architectural geometries</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Created advanced C# and Python plugins extending Rhino/Grasshopper capabilities</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Led cross-disciplinary teams on large-scale infrastructure projects</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Pioneered real-time optimization algorithms for structural form-finding</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card slide-left">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center">
+            <i data-lucide="trees" class="w-8 h-8 mr-4 text-purple-600"></i>
+            <div>
+              <h4 class="text-2xl font-bold text-gray-800">Landscape Designer & BIM Specialist</h4>
+              <p class="text-lg text-purple-600 font-semibold">Buro Happold, London</p>
+            </div>
+          </div>
+          <span class="text-gray-600 font-medium bg-gray-100 px-4 py-2 rounded-full">Jan 2018 – May 2022</span>
+        </div>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Designed sustainable landscape solutions for major urban development projects</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Implemented advanced BIM workflows integrating landscape and structural design</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Developed custom tools for environmental analysis and optimization</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card slide-right">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center">
+            <i data-lucide="map" class="w-8 h-8 mr-4 text-orange-600"></i>
+            <div>
+              <h4 class="text-2xl font-bold text-gray-800">Site Surveyor & GIS Specialist</h4>
+              <p class="text-lg text-orange-600 font-semibold">Orascom Construction PLC, Egypt</p>
+            </div>
+          </div>
+          <span class="text-gray-600 font-medium bg-gray-100 px-4 py-2 rounded-full">Oct 2016 – Sep 2017</span>
+        </div>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Conducted precision surveys for large-scale construction projects using advanced GPS systems</span>
+          </li>
+          <li class="flex items-start">
+            <i data-lucide="chevron-right" class="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0"></i>
+            <span>Developed automated workflows for survey data processing and CAD integration</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="bg-gradient-to-br from-gray-50 to-blue-50 py-24 fade-in">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-4xl font-bold mb-16 text-center flex justify-center items-center">
+        <i data-lucide="rocket" class="w-10 h-10 mr-4 text-blue-600"></i>
+        Featured Projects & Innovations
+      </h3>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="zap" class="w-8 h-8 mr-3 text-yellow-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">SAP-AutoCAD Bridge</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Revolutionary tool automatically generating 2D construction drawings from SAP2000 and STAAD.Pro analysis results, reducing drafting time by 80%.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Automation</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">API Integration</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="warehouse" class="w-8 h-8 mr-3 text-blue-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">Smart Warehouse Modeler</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Comprehensive suite for warehouse design integrating SAP2000, STAAD.Pro, and Tekla Structures with intelligent connection design and optimization.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Multi-Platform</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Optimization</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="database" class="w-8 h-8 mr-3 text-green-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">Construction ERP System</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Enterprise resource planning solution for Qatar-based construction company, integrating project management, inventory, and financial modules.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Enterprise</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Cloud-Based</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="repeat" class="w-8 h-8 mr-3 text-purple-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">Tekla-Revit Synchronizer</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Bidirectional data exchange tool ensuring seamless coordination between structural models and architectural BIM workflows.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">BIM</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Synchronization</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="ship" class="w-8 h-8 mr-3 text-cyan-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">Yacht Complex Project</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Engineered complex steel structure for luxury yacht facility (1200 tons) with advanced connection design and fabrication-ready deliverables.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm">Complex Steel</span>
+            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm">Luxury</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 skill-card hover:shadow-2xl">
+          <div class="flex items-center mb-4">
+            <i data-lucide="settings" class="w-8 h-8 mr-3 text-red-600"></i>
+            <h4 class="text-xl font-bold text-gray-800">AI-Powered Connection Designer</h4>
+          </div>
+          <p class="text-gray-700 mb-4">Machine learning algorithm for optimal steel connection selection and design, integrated with IDEA StatiCa for automated verification.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">AI/ML</span>
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Optimization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="max-w-6xl mx-auto py-24 px-6 fade-in">
+    <h3 class="text-4xl font-bold mb-16 text-center flex justify-center items-center">
+      <i data-lucide="graduation-cap" class="w-10 h-10 mr-4 text-blue-600"></i>
+      Education & Certifications
+    </h3>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card">
+        <div class="flex items-center mb-6">
+          <i data-lucide="building-2" class="w-10 h-10 mr-4 text-blue-600"></i>
+          <div>
+            <h4 class="text-2xl font-bold text-gray-800">B.Sc. Civil Engineering</h4>
+            <p class="text-lg text-blue-600 font-semibold">Al Mansoura University</p>
+          </div>
+        </div>
+        <div class="space-y-3 text-gray-700">
+          <p><strong>Specialization:</strong> Structural Engineering</p>
+          <p><strong>Graduation Project:</strong> Advanced steel warehouse design with integrated mezzanine floor and overhead crane systems</p>
+          <p><strong>Focus Areas:</strong> Steel structures, concrete design, foundation engineering, structural dynamics</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Structural Analysis</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Steel Design</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Project Management</span>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 skill-card">
+        <div class="flex items-center mb-6">
+          <i data-lucide="map-pin" class="w-10 h-10 mr-4 text-green-600"></i>
+          <div>
+            <h4 class="text-2xl font-bold text-gray-800">Diploma in Surveying</h4>
+            <p class="text-lg text-green-600 font-semibold">Assiut University</p>
+          </div>
+        </div>
+        <div class="space-y-3 text-gray-700">
+          <p><strong>Year:</strong> 2016</p>
+          <p><strong>Graduation Project:</strong> Advanced traversing techniques for large-scale construction projects</p>
+          <p><strong>Specialties:</strong> GPS surveying, total station operations, GIS integration, topographic mapping</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">GPS Systems</span>
+          <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">GIS</span>
+          <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Topography</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
+      <h4 class="text-2xl font-bold text-center mb-8 text-gray-800">Professional Certifications & Continuous Learning</h4>
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="text-center p-4">
+          <i data-lucide="award" class="w-12 h-12 mx-auto mb-3 text-yellow-600"></i>
+          <h5 class="font-bold mb-2">API Development</h5>
+          <p class="text-sm text-gray-600">Advanced certification in API design and integration</p>
+        </div>
+        <div class="text-center p-4">
+          <i data-lucide="shield-check" class="w-12 h-12 mx-auto mb-3 text-green-600"></i>
+          <h5 class="font-bold mb-2">Cloud Architecture</h5>
+          <p class="text-sm text-gray-600">Certified in cloud-based solution design</p>
+        </div>
+        <div class="text-center p-4">
+          <i data-lucide="brain" class="w-12 h-12 mx-auto mb-3 text-purple-600"></i>
+          <h5 class="font-bold mb-2">Machine Learning</h5>
+          <p class="text-sm text-gray-600">AI/ML applications in engineering</p>
+        </div>
+        <div class="text-center p-4">
+          <i data-lucide="users" class="w-12 h-12 mx-auto mb-3 text-blue-600"></i>
+          <h5 class="font-bold mb-2">Project Leadership</h5>
+          <p class="text-sm text-gray-600">Certified project management professional</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 text-white py-24 fade-in relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-4xl font-bold mb-8 flex justify-center items-center">
+        <i data-lucide="mail" class="w-10 h-10 mr-4"></i>
+        Let's Connect & Innovate Together
+      </h3>
+      <p class="text-xl mb-12 max-w-3xl mx-auto opacity-90">
+        Ready to push the boundaries of structural engineering and computational design? 
+        Let's collaborate on your next groundbreaking project.
+      </p>
+      
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+  <div class="bg-yellow/10 backdrop-blur-md rounded-xl p-6 skill-card text-yellow-400">
+    <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
+    <h4 class="font-bold mb-2">Phone</h4>
+    <p>+20 1025752494</p>
+  </div>
+
+  <div class="bg-green/10 backdrop-blur-md rounded-xl p-6 skill-card text-green-400">
+    <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
+    <h4 class="font-bold mb-2">Location</h4>
+    <p>Al Haram, Giza, Egypt</p>
+  </div>
+
+  <div class="bg-blue/10 backdrop-blur-md rounded-xl p-6 skill-card text-blue-400">
+    <i data-lucide="mail" class="w-8 h-8 mx-auto mb-3"></i>
+    <h4 class="font-bold mb-2">Email</h4>
+    <p>
+      <a href="mailto:mohamed.elmahdy1196@gmail.com" 
+         class="hover:text-yellow-400 transition">
+         Send Mail
+      </a>
+    </p>
+  </div>
+
+  <div class="bg-purple/10 backdrop-blur-md rounded-xl p-6 skill-card text-purple-400">
+    <i data-lucide="linkedin" class="w-8 h-8 mx-auto mb-3"></i>
+    <h4 class="font-bold mb-2">LinkedIn</h4>
+    <p>
+      <a href="https://www.linkedin.com/in/mohamed-elmahdy-22b42b283" 
+         target="_blank" 
+         class="hover:text-yellow-400 transition">
+         Connect with me
+      </a>
+    </p>
+  </div>
+</div>
+
+      
+     <div class="text-center">
+  <a href="https://wa.me/201275400207" target="_blank"
+     class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold rounded-full hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+    Chat on WhatsApp
+  </a>
+</div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 text-center py-8 border-t border-gray-700">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-lg">&copy; 2025 Mohamed Elmahdy. Innovating the Future of Structural Engineering.</p>
+      <p class="text-sm mt-2">Built with passion for excellence and innovation</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Enhanced typing effect
+    var typed = new Typed('#typed', {
+      strings: [
+        "Structure Engineer", 
+        "Computational Design Expert", 
+		"Software Development Specialist",
+        "BIM Innovation Leader",
+        "Automation Pioneer"
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      startDelay: 1000,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+
+    // Icons initialization
+    lucide.createIcons();
+
+    // Code background animation
+    const codeSnippets = [
+      'public class StructuralAnalysis {',
+      'if (steelConnection.IsOptimal()) {',
+      'foreach (var beam in structure) {',
+      'return Math.Sqrt(stress * factor);',
+      'void OptimizeDesign() {',
+      'double momentCapacity = 0.0;',
+      'var loadCombination = new List<Load>();',
+      'Console.WriteLine("Analysis Complete");',
+      '}',
+      'else {',
+      'while (iteration < maxIter) {',
+      'private static readonly double PI = 3.14159;'
+    ];
+
+    function createCodeLine() {
+      const codeBg = document.getElementById('codeBg');
+      const codeLine = document.createElement('div');
+      codeLine.className = 'code-line';
+      codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+      codeLine.style.left = Math.random() * window.innerWidth + 'px';
+      codeLine.style.animationDelay = Math.random() * 2 + 's';
+      codeLine.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      codeBg.appendChild(codeLine);
+
+      // Remove the element after animation
+      setTimeout(() => {
+        if (codeBg.contains(codeLine)) {
+          codeBg.removeChild(codeLine);
+        }
+      }, 25000);
+    }
+
+    // Create code lines periodically
+    setInterval(createCodeLine, 3000);
+    // Initial code lines
+    for (let i = 0; i < 5; i++) {
+      setTimeout(createCodeLine, i * 1000);
+    }
+
+    // Enhanced skill toggle with animation
+    function toggleSkill(id) {
+      const section = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      
+      if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        section.classList.add('animate__fadeIn');
+        icon.innerHTML = '−';
+      } else {
+        section.classList.add('hidden');
+        section.classList.remove('animate__fadeIn');
+        icon.innerHTML = '+';
+      }
+    }
+
+    // Enhanced scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          
+          // Animate progress bars
+          const progressBars = entry.target.querySelectorAll('.progress-bar');
+          progressBars.forEach(bar => {
+            setTimeout(() => {
+              bar.classList.add('animate');
+            }, 500);
+          });
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add floating animation to skill cards on hover
+    document.querySelectorAll('.skill-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px) rotateX(5deg)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) rotateX(0)';
+      });
+    });
+
+    // Initialize progress bars animation on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const visibleProgressBars = document.querySelectorAll('.progress-bar');
+        visibleProgressBars.forEach(bar => {
+          if (bar.getBoundingClientRect().top < window.innerHeight) {
+            bar.classList.add('animate');
+          }
+        });
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
